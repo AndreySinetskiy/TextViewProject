@@ -16,13 +16,22 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var stepper: UIStepper!
     
     @IBOutlet weak var textViewConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.text = ""
-        textView.font = UIFont(name: "Baskerville-SemiBoldItalic", size: 30)
-        textView.backgroundColor = view.backgroundColor
+        textView.font = UIFont(name: "Baskerville-SemiBoldItalic", size: 20)
+        textView.backgroundColor = .white
+        
+        stepper.layer.cornerRadius = 6
+        stepper.value = 20
+        stepper.minimumValue = 10
+        stepper.maximumValue = 30
+        
+        stepper.tintColor = .white
+        stepper.backgroundColor = .blue
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTextView(notification:)),
@@ -33,18 +42,13 @@ class ViewController: UIViewController {
                                                selector: #selector(updateTextView(notification:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
-        
+
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        //view.endEditing(true) to all objects
-        textView.resignFirstResponder()
-    }
     @objc func updateTextView(notification: Notification) {
         guard let userInfo = notification.userInfo as? [String: Any],
               let keyBoardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-              else { return }
+        else { return }
         
         if notification.name == UIResponder.keyboardDidHideNotification {
             textView.contentInset = UIEdgeInsets.zero
@@ -57,6 +61,18 @@ class ViewController: UIViewController {
         }
         
         textView.scrollRangeToVisible(textView.selectedRange)
+    }
+  
+    @IBAction func changeTextSize(_ sender: UIStepper) {
+        let font = textView.font?.fontName
+        let fontSize = CGFloat(sender.value)
+        textView.font = UIFont(name: font ?? "", size: fontSize)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        //view.endEditing(true) to all objects
+        textView.resignFirstResponder()
     }
 }
 // MARK: - extension

@@ -19,10 +19,10 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYs-0h-Kyl">
                                 <rect key="frame" x="20" y="133" width="374" height="581"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <mutableString key="text">Managing the Keyboard
+                                <string key="text">Managing the Keyboard
 When the user taps in an editable text view, that text view becomes the first responder and automatically asks the system to display the associated keyboard. Because the appearance of the keyboard has the potential to obscure portions of your user interface, it is up to you to make sure that does not happen by repositioning any views that might be obscured. Some system views, like table views, help you by scrolling the first responder into view automatically. If the first responder is at the bottom of the scrolling region, however, you may still need to resize or reposition the scroll view itself to ensure the first responder is visible.
 It is your application’s responsibility to dismiss the keyboard at the time of your choosing. You might dismiss the keyboard in response to a specific user action, such as the user tapping a particular button in your user interface. To dismiss the keyboard, send the resignFirstResponder() message to the text view that is currently the first responder. Doing so causes the text view object to end the current editing session (with the delegate object’s consent) and hide the keyboard.
-The appearance of the keyboard itself can be customized using the properties provided by the UITextInputTraits protocol. Text view objects implement this protocol and support the properties it defines. You can use these properties to specify the type of keyboard (ASCII, Numbers, URL, Email, and others) to display. You can also configure the basic text entry behavior of the keyboard, such as whether it supports automatic capitalization and correction of the text.</mutableString>
+The appearance of the keyboard itself can be customized using the properties provided by the UITextInputTraits protocol. Text view objects implement this protocol and support the properties it defines. You can use these properties to specify the type of keyboard (ASCII, Numbers, URL, Email, and others) to display. You can also configure the basic text entry behavior of the keyboard, such as whether it supports automatic capitalization and correction of the text.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -36,6 +36,12 @@ The appearance of the keyboard itself can be customized using the properties pro
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="mMT-5N-HlB">
+                                <rect key="frame" x="286" y="62" width="94" height="32"/>
+                                <connections>
+                                    <action selector="changeTextSize:" destination="BYZ-38-t0r" eventType="valueChanged" id="lgk-oD-OGc"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
@@ -44,13 +50,16 @@ The appearance of the keyboard itself can be customized using the properties pro
                             <constraint firstItem="sYs-0h-Kyl" firstAttribute="top" secondItem="KoB-05-cOo" secondAttribute="bottom" constant="44" id="JEh-XZ-fjg"/>
                             <constraint firstItem="KoB-05-cOo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33" id="NPA-e8-ZQ1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sYs-0h-Kyl" secondAttribute="bottom" constant="148" id="X8c-hw-KEC"/>
+                            <constraint firstItem="mMT-5N-HlB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="XQt-dp-Hqr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sYs-0h-Kyl" secondAttribute="trailing" constant="20" id="aWo-hX-on4"/>
                             <constraint firstItem="sYs-0h-Kyl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="f7u-MX-0jI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mMT-5N-HlB" secondAttribute="trailing" constant="34" id="jsh-ww-Hno"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="KoB-05-cOo" secondAttribute="trailing" constant="370" id="nx2-pf-2Id"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="countLabel" destination="KoB-05-cOo" id="Gjk-Sb-VgN"/>
+                        <outlet property="stepper" destination="mMT-5N-HlB" id="iRO-pT-s8j"/>
                         <outlet property="textView" destination="sYs-0h-Kyl" id="p9c-eQ-bFR"/>
                         <outlet property="textViewConstraint" destination="X8c-hw-KEC" id="H5x-IX-KLe"/>
                     </connections>
